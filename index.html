@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>History Trivia Quiz</title>
+  </head>
+  <body>
+    <!-- Title & Quiz Options -->
+    <h1 class="title">History Trivia Quiz</h1>
+
+    <form class="options">
+      <div>
+        <p>Select Number of Questions:</p>
+        <input type="number" id="number" min="1" max="15" value="1" />
+      </div>
+
+      <div>
+        <p>Select Difficulty:</p>
+        <select id="difficulty">
+          <option>Any Difficulty</option>
+          <option>Easy</option>
+          <option>Medium</option>
+          <option>Hard</option>
+        </select>
+      </div>
+
+      <div>
+        <p>Select Type:</p>
+        <select id="type">
+          <option>Any Type</option>
+          <option>Multiple Choice</option>
+          <option>True/False</option>
+        </select>
+      </div>
+
+      <button class="btn" id="submitOptions">Submit</button>
+    </form>
+
+    <!-- Quiz Section -->
+    <section class="question-container">
+      <div class="question-box">
+        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
+        <div>
+          <input type="radio" name="q1" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q1" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q1" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q1" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
+        <div>
+          <input type="radio" name="q2" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q2" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q2" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q2" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
+        <div>
+          <input type="radio" name="q3" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q3" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q3" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q3" />
+          <label>Lorem, ipsum dolor.</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
+        <div>
+          <input type="radio" name="q4" id="a4" />
+          <label for="a4">Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q4" id="a4" />
+          <label for="a4">Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q4" id="a4" />
+          <label for="a4">Lorem, ipsum dolor.</label>
+        </div>
+        <div>
+          <input type="radio" name="q4" id="a4" />
+          <label for="a4">Lorem, ipsum dolor.</label>
+        </div>
+      </div>
+
+      <button class="btn" id="submitAnswers">Submit Answers</button>
+    </section>
+  </body>
+</html>
