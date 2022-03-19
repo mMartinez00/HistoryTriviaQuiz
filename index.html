@@ -3,17 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
     <title>History Trivia Quiz</title>
   </head>
   <body>
     <!-- Title & Quiz Options -->
     <h1 class="title">History Trivia Quiz</h1>
 
-    <form class="options">
+    <div class="options">
       <div>
         <p>Select Number of Questions:</p>
-        <input type="number" id="number" min="1" max="15" value="1" />
+        <div class="numInput">
+          <button class="minus">-</button>
+          <input type="number" id="number" min="1" max="15" value="1" />
+          <button class="plus">+</button>
+        </div>
       </div>
 
       <div>
@@ -35,8 +39,15 @@
         </select>
       </div>
 
-      <button class="btn" id="submitOptions">Submit</button>
-    </form>
+      <div>
+        <button class="btn enter" id="enterOptions">Enter</button>
+      </div>
+    </div>
+
+    <!-- Score -->
+    <h2 class="score" id="score">
+      Your score is <span id="scoreNum">85%!</span>
+    </h2>
 
     <!-- Quiz Section -->
     <section class="question-container">
@@ -120,7 +131,7 @@
         </div>
       </div>
 
-      <button class="btn" id="submitAnswers">Submit Answers</button>
+      <button class="btn" id="submitAnswers">Submit</button>
     </section>
   </body>
 </html>
