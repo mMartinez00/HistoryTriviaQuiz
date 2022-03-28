@@ -13,125 +13,29 @@
     <div class="options">
       <div>
         <p>Select Number of Questions:</p>
-        <div class="numInput">
-          <button class="minus">-</button>
-          <input type="number" id="number" min="1" max="15" value="1" />
-          <button class="plus">+</button>
+        <div class="number-input">
+          <button id="decrement">-</button>
+          <input type="number" id="number" min="1" max="20" value="1" />
+          <button id="increment">+</button>
         </div>
       </div>
 
       <div>
-        <p>Select Difficulty:</p>
-        <select id="difficulty">
-          <option>Any Difficulty</option>
-          <option>Easy</option>
-          <option>Medium</option>
-          <option>Hard</option>
-        </select>
-      </div>
-
-      <div>
-        <p>Select Type:</p>
-        <select id="type">
-          <option>Any Type</option>
-          <option>Multiple Choice</option>
-          <option>True/False</option>
-        </select>
-      </div>
-
-      <div>
-        <button class="btn enter" id="enterOptions">Enter</button>
+        <button class="btn enter" id="enter-options">Enter</button>
       </div>
     </div>
 
     <!-- Score -->
     <h2 class="score" id="score">
-      Your score is <span id="scoreNum">85%!</span>
+      Your score is <span id="score-number">85%!</span>
     </h2>
 
     <!-- Quiz Section -->
-    <section class="question-container">
-      <div class="question-box">
-        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
-        <div>
-          <input type="radio" name="q1" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q1" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q1" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q1" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-      </div>
+    <section class="quiz-container" id="quiz-container"></section>
 
-      <div class="question-box">
-        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
-        <div>
-          <input type="radio" name="q2" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q2" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q2" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q2" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-      </div>
+    <!-- Submit answers -->
+    <button class="btn sticky" id="submit-answers">Submit</button>
 
-      <div class="question-box">
-        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
-        <div>
-          <input type="radio" name="q3" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q3" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q3" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q3" />
-          <label>Lorem, ipsum dolor.</label>
-        </div>
-      </div>
-
-      <div class="question-box">
-        <h2 class="question">1. Lorem ipsum dolor sit amet consectetur.</h2>
-        <div>
-          <input type="radio" name="q4" id="a4" />
-          <label for="a4">Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q4" id="a4" />
-          <label for="a4">Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q4" id="a4" />
-          <label for="a4">Lorem, ipsum dolor.</label>
-        </div>
-        <div>
-          <input type="radio" name="q4" id="a4" />
-          <label for="a4">Lorem, ipsum dolor.</label>
-        </div>
-      </div>
-
-      <button class="btn" id="submitAnswers">Submit</button>
-    </section>
+    <script src="./app.js"></script>
   </body>
 </html>

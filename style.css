@@ -16,14 +16,14 @@ body {
 /* Title & Options */
 .title {
   text-align: center;
-  margin: 18px auto;
+  margin: 0 auto 20px;
   color: #fff;
-  font-size: 50px;
+  font-size: 60px;
 }
 
 .options {
   max-width: 85%;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -35,11 +35,12 @@ body {
 }
 
 .options > div p {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
-.numInput {
+.number-input {
   width: 124px;
   height: 30px;
   display: flex;
@@ -49,8 +50,10 @@ input[type="number"] {
   width: 80px;
   padding: 2px 6px;
   background-color: #333;
-  font-size: 16px;
+  font-size: 18px;
+  font-family: inherit;
   color: #fff;
+  text-align: center;
   border: none;
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
@@ -66,8 +69,9 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-.plus,
-.minus {
+/* Buttons */
+#decrement,
+#increment {
   background-color: #333;
   width: 24px;
   height: 30px;
@@ -78,36 +82,22 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-.plus:active,
-.minus:active {
-  font-size: 16px;
+#increment:active,
+#decrement:active {
+  font-size: 14px;
 }
 
-.minus {
+#decrement {
   border-radius: 5px 0 0 5px;
 }
 
-.plus {
+#increment {
   border-radius: 0 5px 5px 0;
 }
 
-#difficulty,
-#type {
-  font-size: 16px;
-  padding: 2px 6px;
-  width: 124px;
-  height: 30px;
-  border-radius: 5px;
-  border: none;
-  font-family: inherit;
-  background: #333;
-  color: #fff;
-  cursor: pointer;
-}
-
-button.enter {
-  padding: 5px 20px;
-  font-size: 16px;
+.btn {
+  padding: 5px 22px;
+  font-size: 18px;
   border-radius: 12px;
   border: none;
   background-color: #0bac0b;
@@ -115,15 +105,60 @@ button.enter {
   cursor: pointer;
 }
 
-button.enter:active {
-  transform: scale(0.98);
+.btn:active {
+  background-color: #0a8a0a;
+}
+
+.btn.sticky {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.3;
+  box-shadow: 2px 8px 14px #000;
+  transition: opacity 0.4s;
+}
+
+.btn.sticky:hover {
+  opacity: 1;
 }
 
 /* Score */
 .score {
   text-align: center;
   font-size: 50px;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   color: #fff;
   display: none;
+}
+
+/* Quiz */
+.quiz-container {
+  width: 850px;
+  max-width: 85%;
+  margin: 20px auto;
+}
+
+.question-box {
+  background-color: #fff;
+  border-radius: 12px;
+  transition: all 0.4s;
+  margin: 32px 0;
+  padding: 16px;
+  color: #333;
+}
+
+.question-box .question {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.question-box > div {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+div > input {
+  cursor: pointer;
 }
