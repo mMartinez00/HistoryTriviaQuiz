@@ -1,4 +1,5 @@
 const enter = document.getElementById("enter-options");
+const submit = document.getElementById("submit-answers");
 const increment = document.getElementById("increment");
 const decrement = document.getElementById("decrement");
 let numberInput = document.getElementById("number");
@@ -15,9 +16,11 @@ enter.addEventListener("click", async () => {
   );
 
   const data = await res.json();
+
   const questions = await data.results;
 
   outputQuiz(questions);
+  console.log(questions);
 });
 
 function outputQuiz(questions) {
@@ -41,8 +44,10 @@ function wrapQuestion(question) {
   return `<h2 class="question">${question}</h2>`;
 }
 
-function incorrectAnswers(answers, question) {
-  return answers.split(",").map(
+function incorrectAnswers(incorrectAnswers, question) {
+  // Regex matches commas to separate array into 4 answers
+  const regex = /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])/g;
+  return incorrectAnswers.split(regex).map(
     (answer) => `
     <div>
       <input type="radio" name="${question.question}" />
@@ -89,5 +94,5 @@ function outputHTML(question, answers) {
   </div>
   `;
 
-  document.getElementById("submit-answers").style.display = "block";
+  submit.style.display = "block";
 }
