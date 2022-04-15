@@ -4,8 +4,8 @@ const increment = document.getElementById("increment");
 const decrement = document.getElementById("decrement");
 let numberInput = document.getElementById("number");
 const quizContainer = document.getElementById("quiz-container");
+const correctAnswers = [];
 
-// Event lsiteners
 increment.addEventListener("click", () => numberInput.stepUp());
 
 decrement.addEventListener("click", () => numberInput.stepDown());
@@ -19,12 +19,12 @@ enter.addEventListener("click", async () => {
 
   const questions = await data.results;
 
-  outputQuiz(questions);
-  console.log(questions);
+  buildQuiz(questions);
 });
 
-function outputQuiz(questions) {
+function buildQuiz(questions) {
   questions.forEach((question) => {
+    // Wrap each question and answer in html tags
     const q = wrapQuestion(`${question.question}`);
 
     const incorrectAnswersArr = incorrectAnswers(
@@ -36,6 +36,10 @@ function outputQuiz(questions) {
 
     let shuffledAnswers = shuffle([...incorrectAnswersArr, correct]);
 
+    // Push each correct answer into array
+    const { correct_answer } = question;
+    correctAnswers.push(correct_answer);
+
     outputHTML(q, shuffledAnswers);
   });
 }
@@ -45,15 +49,16 @@ function wrapQuestion(question) {
 }
 
 function incorrectAnswers(incorrectAnswers, question) {
-  // Regex matches commas to separate array into 4 answers
-  const regex = /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])/g;
+  // Regex matches commas to separate array into 3 answers
+  const regex = /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])|(?<=[a-z]\s),(?=[A-Z])|(?<=\d),(?=\s[A-Z])|(?<=[a-z]),(?=\d)|(?<=[a-z]),(?=\d)|(?<=\d),(?=1)|(?<=\)|\%),|(?<=0),(?=[1-9])|(?<=ć),(?=O|Ò)/gi;
+
   return incorrectAnswers.split(regex).map(
     (answer) => `
     <div>
       <input type="radio" name="${question.question}" />
       <label>${answer}</label>
     </div>
-  `
+   `
   );
 }
 
@@ -66,18 +71,15 @@ function wrapCorrectAnswer(answer, question) {
   `;
 }
 
-// Fisher-Yates shuffle
+// Fisher-Yates shuffle-all answers
 function shuffle(answers) {
   let m = answers.length,
     t,
     i;
 
-  // While there remain elements to shuffle…
   while (m) {
-    // Pick a remaining element…
     i = Math.floor(Math.random() * m--);
 
-    // And swap it with the current element.
     t = answers[m];
     answers[m] = answers[i];
     answers[i] = t;
@@ -95,4 +97,36 @@ function outputHTML(question, answers) {
   `;
 
   submit.style.display = "block";
+}
+
+submit.addEventListener("click", submitAnswers);
+
+function submitAnswers() {
+  const userAnswers = [];
+
+  const radioBtn = document.querySelectorAll('input[type="radio"]');
+
+  radioBtn.forEach((radio) => {
+    if (radio.checked === true) {
+      userAnswers.push(radio.nextElementSibling.innerText);
+    }
+  });
+
+  showResults(userAnswers);
+}
+
+function showResults(userAnswer) {
+  let score = 0;
+
+  userAnswer.forEach((answer, index) => {
+    if (answer === correctAnswers[index]) {
+      score += Math.round((1 / numberInput.value) * 100);
+    }
+  });
+
+  const userScore = document.getElementById("score");
+
+  userScore.innerText = `Your score is ${score}%!`;
+  userScore.style.display = "block";
+  userScore.scrollIntoView({ behavior: "smooth", block: "start" });
 }
