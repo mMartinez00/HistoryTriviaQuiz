@@ -17,30 +17,33 @@ enter.addEventListener("click", async () => {
 
   const data = await res.json();
 
-  const questions = await data.results;
+  const dataArray = await data.results;
 
-  buildQuiz(questions);
+  buildQuiz(dataArray);
 });
 
-function buildQuiz(questions) {
-  questions.forEach((question) => {
+function buildQuiz(dataArray) {
+  dataArray.forEach((questionObj) => {
     // Wrap each question and answer in html tags
-    const q = wrapQuestion(`${question.question}`);
+    const question = wrapQuestion(`${questionObj.question}`);
 
-    const incorrectAnswersArr = incorrectAnswers(
-      `${question.incorrect_answers}`,
-      question
+    const incorrectAnswersArray = incorrectAnswers(
+      `${questionObj.incorrect_answers}`,
+      questionObj
     );
 
-    const correct = wrapCorrectAnswer(`${question.correct_answer}`, question);
+    const correct = wrapCorrectAnswer(
+      `${questionObj.correct_answer}`,
+      questionObj
+    );
 
-    let shuffledAnswers = shuffle([...incorrectAnswersArr, correct]);
+    let shuffledAnswers = shuffle([...incorrectAnswersArray, correct]);
 
     // Push each correct answer into array
-    const { correct_answer } = question;
+    const { correct_answer } = questionObj;
     correctAnswers.push(correct_answer);
 
-    outputHTML(q, shuffledAnswers);
+    outputHTML(question, shuffledAnswers);
   });
 }
 
@@ -50,7 +53,8 @@ function wrapQuestion(question) {
 
 function incorrectAnswers(incorrectAnswers, question) {
   // Regex matches commas to separate array into 3 answers
-  const regex = /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])|(?<=[a-z]\s),(?=[A-Z])|(?<=\d),(?=\s[A-Z])|(?<=[a-z]),(?=\d)|(?<=[a-z]),(?=\d)|(?<=\d),(?=1)|(?<=\)|\%),|(?<=0),(?=[1-9])|(?<=ć),(?=O|Ò)/gi;
+  const regex =
+    /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])|(?<=[a-z]\s),(?=[A-Z])|(?<=\d),(?=\s[A-Z])|(?<=[a-z]),(?=\d)|(?<=[a-z]),(?=\d)|(?<=\d),(?=1)|(?<=\)|\%),|(?<=0),(?=[1-9])|(?<=ć),(?=O|Ò)/gi;
 
   return incorrectAnswers.split(regex).map(
     (answer) => `
@@ -71,7 +75,7 @@ function wrapCorrectAnswer(answer, question) {
   `;
 }
 
-// Fisher-Yates shuffle-all answers
+// Fisher-Yates shuffle (ALL ANSWERS)
 function shuffle(answers) {
   let m = answers.length,
     t,
@@ -99,6 +103,7 @@ function outputHTML(question, answers) {
   submit.style.display = "block";
 }
 
+// Submit Answers
 submit.addEventListener("click", submitAnswers);
 
 function submitAnswers() {
@@ -115,18 +120,19 @@ function submitAnswers() {
   showResults(userAnswers);
 }
 
-function showResults(userAnswer) {
+function showResults(userAnswers) {
   let score = 0;
 
-  userAnswer.forEach((answer, index) => {
+  userAnswers.forEach((answer, index) => {
     if (answer === correctAnswers[index]) {
       score += Math.round((1 / numberInput.value) * 100);
     }
   });
 
   const userScore = document.getElementById("score");
+  const scoreHeading = document.querySelector(".score");
 
-  userScore.innerText = `Your score is ${score}%!`;
-  userScore.style.display = "block";
-  userScore.scrollIntoView({ behavior: "smooth", block: "start" });
+  userScore.innerText = `${score}`;
+  scoreHeading.style.display = "block";
+  scoreHeading.scrollIntoView({ behavior: "smooth", block: "start" });
 }
