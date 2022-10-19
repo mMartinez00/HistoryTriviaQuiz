@@ -125,7 +125,7 @@ function showResults(userAnswers) {
 
   userAnswers.forEach((answer, index) => {
     if (answer === correctAnswers[index]) {
-      score += Math.round((1 / numberInput.value) * 100);
+      score += Math.round((1 / parseInt(numberInput.value)) * 100);
     }
   });
 
