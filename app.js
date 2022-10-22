@@ -19,7 +19,8 @@ enter.addEventListener("click", async () => {
 
   const dataArray = await data.results;
 
-  buildQuiz(dataArray);
+  // buildQuiz(dataArray);
+  console.log(dataArray);
 });
 
 function buildQuiz(dataArray) {
@@ -45,6 +46,9 @@ function buildQuiz(dataArray) {
 
     outputHTML(question, shuffledAnswers);
   });
+
+  // This will prevent the user from click the enter button multiple times and recieving additional questions
+  enter.disabled = true;
 }
 
 function wrapQuestion(question) {
@@ -111,9 +115,9 @@ function submitAnswers() {
 
   const radioBtn = document.querySelectorAll('input[type="radio"]');
 
-  radioBtn.forEach((radio) => {
-    if (radio.checked === true) {
-      userAnswers.push(radio.nextElementSibling.innerText);
+  radioBtn.forEach((btn) => {
+    if (btn.checked === true) {
+      userAnswers.push(btn.nextElementSibling.innerText);
     }
   });
 
