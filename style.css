@@ -9,48 +9,46 @@
 body {
   width: 100%;
   height: 100vh;
-  background-color: #627ea6;
+  background-color: #1e3452;
   font-family: "Dosis", sans-serif;
 }
 
 /* Title & Options */
 .title {
   text-align: center;
-  margin: 0 auto 20px;
+  margin-bottom: 1rem;
   color: #fff;
-  font-size: 60px;
+  font-size: 4rem;
 }
 
 .options {
-  max-width: 85%;
-  margin: 0 auto 20px;
   display: flex;
   justify-content: center;
   align-items: end;
-  color: #000;
 }
 
 .options > div {
-  margin: 0 28px 16px;
+  margin: 0 1rem 1rem;
+  padding: 1rem;
 }
 
-.options > div p {
-  font-size: 20px;
+.options__text {
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 8px;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .number-input {
-  width: 124px;
-  height: 30px;
+  height: 2rem;
   display: flex;
 }
 
 input[type="number"] {
-  width: 80px;
+  width: 100%;
   padding: 2px 6px;
-  background-color: #333;
-  font-size: 18px;
+  background-color: #231c1c;
+  font-size: 1.2rem;
   font-family: inherit;
   color: #fff;
   text-align: center;
@@ -72,10 +70,10 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Buttons */
 .decrement,
 .increment {
-  background-color: #333;
-  width: 24px;
-  height: 30px;
-  font-size: 20px;
+  background-color: #231c1c;
+  width: 1.6rem;
+  height: 2rem;
+  font-size: 1.2rem;
   color: #fff;
   border: none;
   outline: none;
@@ -84,7 +82,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .increment:active,
 .decrement:active {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .decrement {
@@ -96,11 +94,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .btn {
-  padding: 5px 22px;
-  font-size: 18px;
+  width: 70px;
+  height: 32px;
+  font-size: 1.2rem;
   font-family: inherit;
   font-weight: bold;
-  border-radius: 12px;
+  border-radius: 10px;
   border: none;
   background-color: #0bac0b;
   color: #fff;
@@ -114,11 +113,11 @@ input[type="number"]::-webkit-outer-spin-button {
 .btn.sticky {
   display: none;
   position: fixed;
-  bottom: 80px;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.4;
-  box-shadow: 2px 8px 14px #000;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
   transition: opacity 0.4s;
 }
 
@@ -127,41 +126,71 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Score */
-.score {
+.score-heading {
   text-align: center;
   font-size: 60px;
-  margin-bottom: 20px;
   color: #fff;
   display: none;
-  transition: all 0.5s ease;
+  transition: display 0.5s ease;
+}
+
+.score-heading.show {
+  display: block;
 }
 
 /* Quiz */
 .quiz-container {
-  width: 850px;
+  width: 950px;
   max-width: 85%;
-  margin: 20px auto;
+  margin: auto;
 }
 
 .question-box {
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   transition: all 0.4s;
-  margin: 32px 0;
+  margin-bottom: 2rem;
   padding: 16px;
   color: #333;
 }
 
-.question-box .question {
-  font-size: 30px;
-  margin-bottom: 12px;
+.question__title {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
-.question-box > div {
-  font-size: 20px;
-  margin-bottom: 12px;
+.question-box.green {
+  border: #0bac0b 2px solid;
+}
+
+.question-box > .answer__selection {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 div > input {
   cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .options__text {
+    font-size: 14px;
+  }
+
+  .btn {
+    width: 50px;
+    font-size: 16px;
+  }
+
+  .question__title {
+    font-size: calc(2vw + 1rem);
+  }
+
+  .question-box > .answer__selection {
+    font-size: 16px;
+  }
 }

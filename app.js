@@ -4,13 +4,23 @@ const increment = document.getElementById("increment");
 const decrement = document.getElementById("decrement");
 let numberInput = document.getElementById("number");
 const quizContainer = document.getElementById("quiz-container");
+const scoreHeading = document.querySelector(".score-heading");
+const userScore = document.getElementById("user-score");
 const correctAnswers = [];
 
 increment.addEventListener("click", () => numberInput.stepUp());
 
 decrement.addEventListener("click", () => numberInput.stepDown());
 
-enter.addEventListener("click", async () => {
+enter.addEventListener("click", () => {
+  fetchQuiz()
+    .then((dataArray) => buildQuiz(dataArray))
+    .catch(() => {
+      quizContainer.innerHTML = `<h1 class="error">There was an error.</h1>`;
+    });
+});
+
+async function fetchQuiz() {
   const res = await fetch(
     `https://opentdb.com/api.php?amount=${numberInput.value}&category=23`
   );
@@ -19,13 +29,12 @@ enter.addEventListener("click", async () => {
 
   const dataArray = await data.results;
 
-  // buildQuiz(dataArray);
-  console.log(dataArray);
-});
+  return dataArray;
+}
 
 function buildQuiz(dataArray) {
+  // Wrap each question and answers in html tags
   dataArray.forEach((questionObj) => {
-    // Wrap each question and answer in html tags
     const question = wrapQuestion(`${questionObj.question}`);
 
     const incorrectAnswersArray = incorrectAnswers(
@@ -52,7 +61,7 @@ function buildQuiz(dataArray) {
 }
 
 function wrapQuestion(question) {
-  return `<h2 class="question">${question}</h2>`;
+  return `<h2 class="question__title">${question}</h2>`;
 }
 
 function incorrectAnswers(incorrectAnswers, question) {
@@ -62,7 +71,7 @@ function incorrectAnswers(incorrectAnswers, question) {
 
   return incorrectAnswers.split(regex).map(
     (answer) => `
-    <div>
+    <div class="answer__selection">
       <input type="radio" name="${question.question}" />
       <label>${answer}</label>
     </div>
@@ -72,7 +81,7 @@ function incorrectAnswers(incorrectAnswers, question) {
 
 function wrapCorrectAnswer(answer, question) {
   return `
-  <div>
+  <div class="answer__selection">
     <input type="radio" name="${question.question}" />
     <label>${answer}</label>
   </div>
@@ -125,6 +134,7 @@ function submitAnswers() {
 }
 
 function showResults(userAnswers) {
+  const question_boxes = document.querySelectorAll(".question-box");
   let score = 0;
 
   userAnswers.forEach((answer, index) => {
@@ -133,10 +143,7 @@ function showResults(userAnswers) {
     }
   });
 
-  const userScore = document.getElementById("score");
-  const scoreHeading = document.querySelector(".score");
-
   userScore.innerText = `${score}`;
-  scoreHeading.style.display = "block";
+  scoreHeading.classList.add("show");
   scoreHeading.scrollIntoView({ behavior: "smooth", block: "start" });
 }
