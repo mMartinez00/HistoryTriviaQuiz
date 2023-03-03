@@ -38,7 +38,7 @@ function buildQuiz(dataArray) {
     const question = wrapQuestion(`${questionObj.question}`);
 
     const incorrectAnswersArray = incorrectAnswers(
-      `${questionObj.incorrect_answers}`,
+      questionObj.incorrect_answers,
       questionObj
     );
 
@@ -65,25 +65,25 @@ function wrapQuestion(question) {
 }
 
 function incorrectAnswers(incorrectAnswers, question) {
-  // Regex matches commas to separate array into 3 answers
-  const regex =
-    /(?<=,\d{3}),(?=[1-9])|(?<!\d)\b,\b(?!\d)|(?<=[1-9]),(?=[1-9])|(?<=\d),(?=[A-Z])|(?<=[a-z]\s),(?=[A-Z])|(?<=\d),(?=\s[A-Z])|(?<=[a-z]),(?=\d)|(?<=[a-z]),(?=\d)|(?<=\d),(?=1)|(?<=\)|\%),|(?<=0),(?=[1-9])|(?<=ć),(?=O|Ò)/gi;
+  return incorrectAnswers.map((answer) => {
+    return `<div class="answer__selection">
 
-  return incorrectAnswers.split(regex).map(
-    (answer) => `
-    <div class="answer__selection">
-      <input type="radio" name="${question.question}" />
-      <label>${answer}</label>
-    </div>
-   `
-  );
+         <input type="radio" name="${question.question}" />
+
+         <label>${answer}</label>
+         
+       </div>`;
+  });
 }
 
 function wrapCorrectAnswer(answer, question) {
   return `
   <div class="answer__selection">
+
     <input type="radio" name="${question.question}" />
+
     <label>${answer}</label>
+
   </div>
   `;
 }
